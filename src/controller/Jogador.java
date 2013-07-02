@@ -5,9 +5,12 @@ import java.util.ArrayList;
 public class Jogador {
 
 	private int id;
-	private int nome;
+	private String nome;
 	private Baralho mao;
-	private int daVez;
+	// [FIXME] alterar modelagem, gerou como int quando deveria ser boolean, 
+	//na verdade verificar todos métodos pois muitos geraram com tipo int.
+	//
+	private boolean daVez;
 	private Estoque estoque;
 	private ArrayList<Estoque> pilhaDescarte;
 	private boolean vencedor;
@@ -21,9 +24,7 @@ public class Jogador {
 		throw new UnsupportedOperationException();
 	}
 
-	public void isDaVez() {
-		throw new UnsupportedOperationException();
-	}
+	
 
 	/**
 	 * 
@@ -45,41 +46,8 @@ public class Jogador {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param mao
-	 */
-	public void setMao(Baralho mao) {
-		this.mao = mao;
-	}
-
-	public ArrayList getMao() {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param daVez
-	 */
-	public void setDaVez(int daVez) {
-		this.daVez = daVez;
-	}
-
-	public void getEstoque() {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param estoque
-	 */
-	public void setEstoque(int estoque) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void isVencedor() {
-		throw new UnsupportedOperationException();
-	}
+	
+	
 
 	/**
 	 * 
@@ -97,25 +65,7 @@ public class Jogador {
 		throw new UnsupportedOperationException();
 	}
 
-	public void getPilhaDescarte() {
-		throw new UnsupportedOperationException();
-	}
 
-	/**
-	 * 
-	 * @param pilhaDescarte
-	 */
-	public void setPilhaDescarte(int pilhaDescarte) {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param vencedor
-	 */
-	public void setVencedor(int vencedor) {
-		throw new UnsupportedOperationException();
-	}
 
 	public int getId() {
 		return id;
@@ -125,16 +75,74 @@ public class Jogador {
 		this.id = id;
 	}
 
-	public void setVencedor(boolean vencedor) {
-		this.vencedor = vencedor;
+
+	public String getNome() {
+		return nome;
 	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Baralho getMao() {
+		return mao;
+	}
+
+	public void setMao(Baralho mao) {
+		this.mao = mao;
+	}
+
+
+
+	public boolean isDaVez() {
+		return daVez;
+	}
+
+
+
+	public void setDaVez(boolean daVez) {
+		this.daVez = daVez;
+	}
+
+
+
+	public Estoque getEstoque() {
+		return estoque;
+	}
+
+
 
 	public void setEstoque(Estoque estoque) {
 		this.estoque = estoque;
 	}
 
+
+
+	public ArrayList<Estoque> getPilhaDescarte() {
+		return pilhaDescarte;
+	}
+
+
+
 	public void setPilhaDescarte(ArrayList<Estoque> pilhaDescarte) {
 		this.pilhaDescarte = pilhaDescarte;
 	}
+
+
+
+	public boolean isVencedor() {
+		return vencedor;
+	}
+
+
+
+	public void setVencedor(boolean vencedor) {
+		this.vencedor = vencedor;
+	}
+
+
+
+
+	
 
 }
