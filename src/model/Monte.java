@@ -1,4 +1,5 @@
-package controller;
+package model;
+
 
 public class Monte extends Baralho {
 

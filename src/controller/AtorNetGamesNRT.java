@@ -2,6 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 
+import model.Jogador;
+
 public class AtorNetGamesNRT implements OuvidorProxy {
 
 	private Proxy proxy;

@@ -1,4 +1,6 @@
-package controller;
+package model;
+
+import controller.Jogada;
 
 public class Carta implements Jogada {
 

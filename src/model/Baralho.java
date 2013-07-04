@@ -1,6 +1,7 @@
-package controller;
+package model;
 
 import java.util.ArrayList;
+
 
 public class Baralho {
 

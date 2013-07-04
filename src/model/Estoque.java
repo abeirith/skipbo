@@ -1,14 +1,15 @@
-package controller;
+package model;
 
 import java.util.ArrayList;
 
-public class Bolo {
+
+public class Estoque extends Baralho {
 
 	/**
 	 * 
 	 * @param gerar
 	 */
-	public Bolo(boolean gerar) {
+	public Estoque(int gerar) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -16,11 +17,11 @@ public class Bolo {
 		throw new UnsupportedOperationException();
 	}
 
-	public int getTamanhoBolo() {
+	public int getTamanhoEstoque() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Estoque getBolo() {
+	public Estoque getEstoque() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -28,7 +29,11 @@ public class Bolo {
 	 * 
 	 * @param cartas
 	 */
-	public void setBolo(ArrayList<Carta> cartas) {
+	public void setEstoque(ArrayList<Carta> cartas) {
+		throw new UnsupportedOperationException();
+	}
+
+	public Carta entregaCarta() {
 		throw new UnsupportedOperationException();
 	}
 

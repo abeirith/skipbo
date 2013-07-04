@@ -2,6 +2,10 @@ package controller;
 
 import java.util.ArrayList;
 
+import model.Estoque;
+import model.Jogador;
+import model.Monte;
+
 public class Mesa {
 
 	private Jogador jogador1;

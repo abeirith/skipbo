@@ -1,6 +1,8 @@
-package controller;
+package model;
 
 import java.util.ArrayList;
+
+
 
 public class Jogador {
 
@@ -21,7 +23,8 @@ public class Jogador {
 	 * @param nome
 	 */
 	public Jogador(int id, String nome) {
-		throw new UnsupportedOperationException();
+		this.id = id;
+		this.nome =  nome;
 	}
 
 	
