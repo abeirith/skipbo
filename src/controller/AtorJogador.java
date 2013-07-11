@@ -68,8 +68,24 @@ public class AtorJogador extends JFrame {
 
 	private void initialize() {
 		atorRede = new AtorRede(this);
-		this.setSize(900, 542);
+		this.setSize(1220, 750);
 		this.setContentPane(getJContentPane());
+		
+		JLabel lblPilhadescarte = new JLabel("pilhaDescarte1");
+		lblPilhadescarte.setBounds(502, 429, 56, 70);
+		jContentPane_1.add(lblPilhadescarte);
+		
+		JLabel lblPilhadescarte_1 = new JLabel("pilhaDescarte2");
+		lblPilhadescarte_1.setBounds(553, 429, 67, 70);
+		jContentPane_1.add(lblPilhadescarte_1);
+		
+		JLabel lblPilhadescarte_2 = new JLabel("pilhaDescarte3");
+		lblPilhadescarte_2.setBounds(620, 429, 56, 70);
+		jContentPane_1.add(lblPilhadescarte_2);
+		
+		JLabel lblPilhadescarte_3 = new JLabel("pilhaDescarte4");
+		lblPilhadescarte_3.setBounds(676, 429, 56, 70);
+		jContentPane_1.add(lblPilhadescarte_3);
 		
 		this.setTitle("SkipBo");
 		this.setResizable(true);
@@ -92,35 +108,35 @@ public class AtorJogador extends JFrame {
 		
 		JLabel carta2 = new JLabel("carta2");
 		carta2.setIcon(new ImageIcon(getClass().getResource("/view/view.imagens/carta"+cartasSorteadas.get(1)+".png")));
-		carta2.setBounds(444, 406, 56, 88);
+		carta2.setBounds(576, 578, 56, 88);
 		jContentPane_1.add(carta2);
 		
 		JLabel carta3 = new JLabel("carta3");
 		carta3.setIcon(new ImageIcon(getClass().getResource("/view/view.imagens/carta"+cartasSorteadas.get(2)+".png")));
-		carta3.setBounds(512, 408, 56, 86);
+		carta3.setBounds(644, 579, 56, 86);
 		jContentPane_1.add(carta3);
 		
 		JLabel carta4 = new JLabel("carta4");
 		carta4.setIcon(new ImageIcon(getClass().getResource("/view/view.imagens/carta"+cartasSorteadas.get(3)+".png")));
-		carta4.setBounds(576, 406, 56, 88);
+		carta4.setBounds(719, 578, 56, 88);
 		jContentPane_1.add(carta4);
 		
 		JLabel carta5 = new JLabel("carta5");
 		carta5.setIcon(new ImageIcon(getClass().getResource("/view/view.imagens/carta"+cartasSorteadas.get(4)+".png")));
-		carta5.setBounds(644, 406, 56, 88);
+		carta5.setBounds(787, 578, 56, 88);
 		jContentPane_1.add(carta5);
 		
 		JLabel base1 = new JLabel("base1");
-		base1.setBounds(354, 224, 47, 74);
+		base1.setBounds(481, 307, 47, 74);
 		
 		JLabel base2 = new JLabel("base2");
-		base2.setBounds(412, 224, 47, 74);
+		base2.setBounds(553, 307, 47, 74);
 		
 		JLabel base3 = new JLabel("base3");
-		base3.setBounds(471, 224, 47, 70);
+		base3.setBounds(629, 309, 47, 70);
 		
 		JLabel base4 = new JLabel("base4");
-		base4.setBounds(530, 224, 47, 74);
+		base4.setBounds(705, 307, 47, 74);
 		
 		JLabel pilhaReserva = new JLabel("pilhaReserva");
 		pilhaReserva.addMouseListener(new MouseAdapter() {
@@ -129,8 +145,8 @@ public class AtorJogador extends JFrame {
 				JOptionPane.showMessageDialog(null, "aaa");
 			}
 		});
-		pilhaReserva.setBounds(264, 406, 57, 76);
-		carta1.setBounds(366, 406, 66, 88);
+		pilhaReserva.setBounds(364, 549, 57, 76);
+		carta1.setBounds(502, 578, 66, 88);
 		jContentPane_1.add(base1);
 		jContentPane_1.add(base2);
 		jContentPane_1.add(base3);
