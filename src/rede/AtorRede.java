@@ -1,6 +1,10 @@
 package rede;
 
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+
+import controller.AtorJogador;
 
 import br.ufsc.inf.leobr.cliente.Jogada;
 import br.ufsc.inf.leobr.cliente.OuvidorProxy;
@@ -9,28 +13,40 @@ import br.ufsc.inf.leobr.cliente.exception.ArquivoMultiplayerException;
 import br.ufsc.inf.leobr.cliente.exception.JahConectadoException;
 import br.ufsc.inf.leobr.cliente.exception.NaoConectadoException;
 import br.ufsc.inf.leobr.cliente.exception.NaoPossivelConectarException;
-
+//ESSA CLASSE REPRESENTA O ATORNETGAMES
 public class AtorRede implements OuvidorProxy {
 
-	private Proxy proxy;
 	
+	
+	
+	private Proxy proxy;
+	private AtorJogador atorJogador;
+	private boolean ehMinhaVez = false;
+
+	private JMenu menuRede = null;
+
+	private JMenuItem jMenuItemConectar = null;
+	private JMenuItem jMenuItemIniciarPartidaRede = null;
+	private JMenuItem jMenuItemDesconectar = null;
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public AtorRede() {
+	public AtorRede(AtorJogador atorJogador) {
 		super();
-		//[FIXME] No tutorial é criado um atorChat, aqui seria um atorJogador?
 		proxy = Proxy.getInstance();
 		proxy.addOuvinte(this);
+		this.atorJogador = atorJogador;
 	}
-	
-	public void conectar(String nome, String servidor){
+
+	protected void conectar(String nome, String servidor) {
 		try {
 			proxy.conectar(servidor, nome);
 		} catch (JahConectadoException e) {
-			//[FIXME] Verificar o parametro null, deveria ser a tela aonde sera mostrada a imagem
+			// [FIXME] Verificar o parametro null, deveria ser a tela aonde sera
+			// mostrada a imagem
 			JOptionPane.showMessageDialog(null, e.getMessage());
 			e.printStackTrace();
 		} catch (NaoPossivelConectarException e) {
@@ -41,8 +57,8 @@ public class AtorRede implements OuvidorProxy {
 			e.printStackTrace();
 		}
 	}
-	
-	public void iniciarPartidaRede(){
+
+	public void iniciarPartidaRede() {
 		try {
 			proxy.iniciarPartida(2);
 		} catch (NaoConectadoException e) {
@@ -50,24 +66,43 @@ public class AtorRede implements OuvidorProxy {
 			e.printStackTrace();
 		}
 	}
-	//[FIXME] É necessario pensar num objeto que implemente a interface Jogada e que englobe as informacoes necessarias que devem ser enviadas ao outro jogador quando é realizada uma 
-	//Jogada, para poder passo-lo como parametro deste metodo.
-	public void enviarJogada(){
-		//proxy.enviaJogada(jogada);
-		
+
+	// [FIXME] É necessario pensar num objeto que implemente a interface Jogada
+	// e que englobe as informacoes necessarias que devem ser enviadas ao outro
+	// jogador quando é realizada uma
+	// Jogada, para poder passo-lo como parametro deste metodo.
+	public void enviarJogada() {
+		// proxy.enviaJogada(jogada);
+
 	}
-	public void desconectar(){
+
+	public void desconectar() {
 		try {
+			atorJogador.terminarPartidaEmAndamento();
 			proxy.desconectar();
 		} catch (NaoConectadoException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 			e.printStackTrace();
 		}
 	}
+
+	public boolean ehMinhaVez() {
+		return ehMinhaVez;
+	}
+
 	@Override
 	public void iniciarNovaPartida(Integer posicao) {
-		// TODO Auto-generated method stub
-
+		if (posicao == 1) {
+			// JOptionPane.showMessageDialog(atorJogador,
+			// "Partida Iniciada, você começa jogando!");
+			ehMinhaVez = true;
+			atorJogador.iniciarPartidaRede(ehMinhaVez);
+		} else {
+			// JOptionPane.showMessageDialog(atorJogador,
+			// "Partida Iniciada, aguarde uma jogada");
+			ehMinhaVez = false;
+			atorJogador.iniciarPartidaRede(ehMinhaVez);
+		}
 	}
 
 	@Override
@@ -90,7 +125,9 @@ public class AtorRede implements OuvidorProxy {
 
 	@Override
 	public void tratarConexaoPerdida() {
-		// TODO Auto-generated method stub
+		// JOptionPane.showMessageDialog(atorJogador,
+		// "A partida não pode ser iniciada devido ao seguinte erro: "
+		// + message);
 
 	}
 
@@ -107,11 +144,33 @@ public class AtorRede implements OuvidorProxy {
 		// TODO Auto-generated method stub
 
 	}
+
 	public Proxy getProxy() {
 		return proxy;
 	}
+
 	public void setProxy(Proxy proxy) {
 		this.proxy = proxy;
+	}
+	
+	private JMenuItem getJMenuItemConectar() {
+		if (jMenuItemConectar == null) {
+			jMenuItemConectar = new JMenuItem();
+			jMenuItemConectar.setText("Conectar");
+			jMenuItemConectar
+					.addActionListener(new java.awt.event.ActionListener() {
+						public void actionPerformed(java.awt.event.ActionEvent e) {
+							conectar();
+						}
+
+					});
+		}
+		return jMenuItemConectar;
+	}
+	
+	protected void conectar() {
+		GuiRede ic = new GuiRede(this);
+		ic.createFront();
 	}
 
 }

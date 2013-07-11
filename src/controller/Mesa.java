@@ -22,19 +22,15 @@ public class Mesa {
 	 * @param ajogador
 	 */
 	public Mesa(AtorJogador ajogador) {
-		throw new UnsupportedOperationException();
 	}
 
 	public void limparMesa() {
-		throw new UnsupportedOperationException();
 	}
 
 	public void desabilitarMesa() {
-		throw new UnsupportedOperationException();
 	}
 
 	public void habilitarMesa() {
-		throw new UnsupportedOperationException();
 	}
 
 //	public InterfaceLocal comprarCartaBolo() {
@@ -58,7 +54,6 @@ public class Mesa {
 	}
 
 	public void verificaInicioRodada() {
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -87,11 +82,9 @@ public class Mesa {
 	 * @param posicao
 	 */
 	public void iniciaJogo(int posicao) {
-		throw new UnsupportedOperationException();
 	}
 
 	public void darAsCartas() {
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -104,7 +97,6 @@ public class Mesa {
 	}
 
 	public void getJogador2() {
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -112,11 +104,9 @@ public class Mesa {
 	 * @param jogador2
 	 */
 	public void setJogador2(int jogador2) {
-		throw new UnsupportedOperationException();
 	}
 
 	public void getJogador1() {
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -124,7 +114,6 @@ public class Mesa {
 	 * @param jogador1
 	 */
 	public void setJogador1(int jogador1) {
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -136,15 +125,12 @@ public class Mesa {
 //	}
 
 	public void tratarInsercaoNaMesa() {
-		throw new UnsupportedOperationException();
 	}
 
 	public void temVencedor() {
-		throw new UnsupportedOperationException();
 	}
 
 	public void getStatusPartida() {
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -152,11 +138,9 @@ public class Mesa {
 	 * @param idJog
 	 */
 	public void setJogadorDaVez(int idJog) {
-		throw new UnsupportedOperationException();
 	}
 
 	public void getJogadorDaVez() {
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -164,7 +148,6 @@ public class Mesa {
 	 * @param msg
 	 */
 	public void setMensagem(int msg) {
-		throw new UnsupportedOperationException();
 	}
 
 	public void setJogador1(Jogador jogador1) {

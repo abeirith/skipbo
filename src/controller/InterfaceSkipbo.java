@@ -1,5 +1,7 @@
 package controller;
 
+import javax.swing.JFrame;
+
 public class InterfaceSkipbo extends JFrame {
 
 	public void conectar() {

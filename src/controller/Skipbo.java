@@ -1,12 +1,15 @@
 package controller;
 
-import view.TelaPrincipal;
+import javax.swing.JFrame;
+
 
 public class Skipbo {
-//[FIXME]
 	public static void main(String[] args) {
-		TelaPrincipal principal = new TelaPrincipal();
-		principal.setVisible(true);
+		AtorJogador janela;
+		janela = new AtorJogador();
+		janela.setLocationRelativeTo(null);
+		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		janela.setVisible(true);
 	}
 
 }
