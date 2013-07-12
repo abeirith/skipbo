@@ -1,7 +1,9 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import model.Carta;
 import model.Estoque;
 import model.Jogador;
 import model.Monte;
@@ -16,6 +18,7 @@ public class Mesa {
 	private boolean mesaHabilitada;
 	private AtorNetGamesNRT comunicaRede;
 	private AtorJogador ajogador;
+	protected boolean partidaEmAndamento;
 
 	/**
 	 * 
@@ -124,7 +127,25 @@ public class Mesa {
 //		throw new UnsupportedOperationException();
 //	}
 
-	public void tratarInsercaoNaMesa() {
+	public void tratarInsercaoNaMesa(Carta carta) {
+		
+		
+//		if(baseSelecionada == 1){
+//			List<Carta> cartasBase1 = base.get(0).getCartasBase();
+//			if (cartasBase1.get(cartasBase1.size()-1).getNumero()+1 == carta.getNumero()) {
+//				
+//			}else{
+//				throw new Exception("Numero carta inválido exception");
+//			}
+//			
+//			
+//		}else if (baseSelecionada == 2) {
+//			List<Carta> cartasBase2 = base.get(1).getCartasBase();
+//		}else if(baseSelecionada == 3){
+//			List<Carta> cartasBase3 = base.get(2).getCartasBase();
+//		}else{
+//			List<Carta> cartasBase4=  base.get(3).getCartasBase();
+//		}
 	}
 
 	public void temVencedor() {
@@ -142,6 +163,7 @@ public class Mesa {
 
 	public void getJogadorDaVez() {
 	}
+	
 
 	/**
 	 * 
@@ -188,6 +210,10 @@ public class Mesa {
 
 	public void setAjogador(AtorJogador ajogador) {
 		this.ajogador = ajogador;
+	}
+
+	public boolean informarPartidaEmAndamento() {
+		return partidaEmAndamento;
 	}
 
 }

@@ -1,5 +1,7 @@
 package rede;
 
+import java.awt.Rectangle;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -171,6 +173,48 @@ public class AtorRede implements OuvidorProxy {
 	protected void conectar() {
 		GuiRede ic = new GuiRede(this);
 		ic.createFront();
+	}
+
+	public JMenu getMenuRede() {
+		if (menuRede == null) {
+			menuRede = new JMenu();
+			menuRede.setText("Jogar Online");
+			menuRede.setBounds(new Rectangle(1, 0, 57, 21));
+			menuRede.add(getJMenuItemConectar());
+			menuRede.add(getJMenuItemIniciarPartidaRede());
+			menuRede.add(getJMenuItemDesconectar());
+		}
+		return menuRede;
+	}
+
+	private JMenuItem getJMenuItemDesconectar() {
+		if (jMenuItemDesconectar == null) {
+			jMenuItemDesconectar = new JMenuItem();
+			jMenuItemDesconectar.setText("Desconectar");
+			jMenuItemDesconectar
+					.addActionListener(new java.awt.event.ActionListener() {
+						public void actionPerformed(java.awt.event.ActionEvent e) {
+							desconectar();
+						}
+					});
+		}
+		return jMenuItemDesconectar;
+	}
+
+	private JMenuItem getJMenuItemIniciarPartidaRede() {
+		if (jMenuItemIniciarPartidaRede == null) {
+			jMenuItemIniciarPartidaRede = new JMenuItem();
+			jMenuItemIniciarPartidaRede.setText("Iniciar partida");
+			jMenuItemIniciarPartidaRede
+					.addActionListener(new java.awt.event.ActionListener() {
+						public void actionPerformed(java.awt.event.ActionEvent e) {	
+							if(!atorJogador.informarPartidaEmAndamento())
+								iniciarPartidaRede();
+						}
+
+					});
+		}
+		return jMenuItemIniciarPartidaRede;
 	}
 
 }

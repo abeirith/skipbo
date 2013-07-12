@@ -23,7 +23,7 @@ public class PainelInformacoes extends JDialog {
 	public PainelInformacoes(){
 		setLayout(null);
 		
-		Icon ufsc = new ImageIcon(ClassLoader.getSystemResource("ufsc.png"));
+		Icon ufsc = new ImageIcon(getClass().getResource("/view/view.imagens/ufsc.png"));
 		imagem = new JLabel();
 		imagem.setBounds(new Rectangle(25, 10, 83, 118));
 		imagem.setIcon(ufsc);

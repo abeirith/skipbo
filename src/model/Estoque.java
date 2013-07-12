@@ -1,9 +1,12 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Estoque extends Baralho {
+	
+	private List<Carta> cartasBase = new ArrayList<>();
 
 	/**
 	 * 
@@ -35,6 +38,14 @@ public class Estoque extends Baralho {
 
 	public Carta entregaCarta() {
 		throw new UnsupportedOperationException();
+	}
+
+	public List<Carta> getCartasBase() {
+		return cartasBase;
+	}
+
+	public void setCartasBase(List<Carta> cartasBase) {
+		this.cartasBase = cartasBase;
 	}
 
 }

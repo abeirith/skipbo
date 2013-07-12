@@ -15,7 +15,7 @@ public class TelaPrincipal extends JPanel {
 
 	
 	public TelaPrincipal() {
-		ImageIcon icon = new ImageIcon(getClass().getResource("/view/view.imagens/fundoSkipbo_jogo.jpg"));
+		ImageIcon icon = new ImageIcon(getClass().getResource("/view/view.imagens/fundoSkipbo.jpg"));
 		this.img = icon.getImage();
 		Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
 		setPreferredSize(size);
