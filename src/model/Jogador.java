@@ -1,33 +1,31 @@
 package model;
 
 import java.util.ArrayList;
-
-
+import java.util.List;
 
 public class Jogador {
 
 	private int id;
 	private String nome;
-	private Baralho mao;
-	// [FIXME] alterar modelagem, gerou como int quando deveria ser boolean, 
-	//na verdade verificar todos métodos pois muitos geraram com tipo int.
-	//
+	private List<Carta> mao;
 	private boolean daVez;
 	private Estoque estoque;
 	private ArrayList<Estoque> pilhaDescarte;
 	private boolean vencedor;
-
+	private List<Carta> pilhaReserva;
 	/**
 	 * 
 	 * @param id
 	 * @param nome
 	 */
-	public Jogador(int id, String nome) {
-		this.id = id;
-		this.nome =  nome;
+	public Jogador() {
+		// TODO Auto-generated constructor stub
 	}
 
-	
+	public Jogador(int id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
 
 	/**
 	 * 
@@ -49,9 +47,6 @@ public class Jogador {
 		throw new UnsupportedOperationException();
 	}
 
-	
-	
-
 	/**
 	 * 
 	 * @param carta
@@ -68,8 +63,6 @@ public class Jogador {
 		throw new UnsupportedOperationException();
 	}
 
-
-
 	public int getId() {
 		return id;
 	}
@@ -77,7 +70,6 @@ public class Jogador {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getNome() {
 		return nome;
@@ -87,65 +79,77 @@ public class Jogador {
 		this.nome = nome;
 	}
 
-	public Baralho getMao() {
+	public List<Carta> getMao() {
 		return mao;
 	}
 
-	public void setMao(Baralho mao) {
-		this.mao = mao;
+	public void setMao(List<Carta> cartasMao) {
+		this.mao = cartasMao;
 	}
-
-
 
 	public boolean isDaVez() {
 		return daVez;
 	}
 
-
-
 	public void setDaVez(boolean daVez) {
 		this.daVez = daVez;
 	}
-
-
 
 	public Estoque getEstoque() {
 		return estoque;
 	}
 
-
-
 	public void setEstoque(Estoque estoque) {
 		this.estoque = estoque;
 	}
-
-
 
 	public ArrayList<Estoque> getPilhaDescarte() {
 		return pilhaDescarte;
 	}
 
-
-
 	public void setPilhaDescarte(ArrayList<Estoque> pilhaDescarte) {
 		this.pilhaDescarte = pilhaDescarte;
 	}
-
-
 
 	public boolean isVencedor() {
 		return vencedor;
 	}
 
-
-
 	public void setVencedor(boolean vencedor) {
 		this.vencedor = vencedor;
 	}
 
+	public void iniciar(String nome) {
+		daVez = false;
+		vencedor = false;
+		this.nome = nome;
+	}
 
-
-
+	public void habilitar() {
+		daVez = true;
+	}
 	
+	
+	public void desabilitar() {
+		daVez = false;
+	}
 
+	public void reiniciar() {
+		daVez = false;
+		vencedor = false;
+	}
+
+
+	public List<Carta> getPilhaReserva() {
+		return this.pilhaReserva;
+	}
+
+	public void setPilhaReserva(List<Carta> pilhaReserva) {
+		this.pilhaReserva = pilhaReserva;
+	}
+
+	public void removeCartaSelecionada(Carta cartaSelecionada) {
+		this.getMao().remove(cartaSelecionada);
+		
+	}
 }

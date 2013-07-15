@@ -1,16 +1,16 @@
 package model;
 
-import controller.Jogada;
+import br.ufsc.inf.leobr.cliente.Jogada;
 
-public class Carta implements Jogada {
 
+public class Carta implements Jogada{
+	
+	private static final long serialVersionUID = 1L;
 	private int numero;
 	private boolean coringa;
 
-	/**
-	 * 
-	 * @param numero
-	 */
+	public Carta() {
+	}
 	public Carta(int numero) {
 		this.setNumero(numero);
 	}
@@ -25,6 +25,10 @@ public class Carta implements Jogada {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+
+	public void setCoringa(boolean coringa) {
+		this.coringa = coringa;
 	}
 
 }

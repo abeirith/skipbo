@@ -7,12 +7,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 public class GuiRede implements ActionListener {
-	private AtorRede jogo;
+	private AtorRede atorRede;
 
 	private JFrame viewFrame;
 
@@ -26,16 +27,11 @@ public class GuiRede implements ActionListener {
 	private JLabel nickLabel = new JLabel("Nick"),
 			ipServidorLabel = new JLabel("Ip do servidor:");
 
-	public GuiRede(AtorRede jogo) {
-		this.jogo = jogo;
+	public GuiRede(AtorRede atorRede) {
+		this.atorRede = atorRede;
 		this.ipServidorField.setText("venus.inf.ufsc.br");
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
 
 	public void createFront() {
 
@@ -74,6 +70,58 @@ public class GuiRede implements ActionListener {
 
 		conectarViewPanel.add(camposViewPanel);
 		conectarViewPanel.add(botoesViewPanel);
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+
+		Object o = e.getSource();
+
+		if (o != null && o instanceof JButton) {
+
+			JButton item = (JButton) o;
+
+			if (item == this.contectarButton) {
+				this.conectar();
+			}
+			if (item == this.cancelarButton) {
+				this.cancelar();
+			}
+
+		}
+
+	}
+
+	/**
+	 * Retorna para a tela principal
+	 */
+	private void cancelar() {
+		viewFrame.setVisible(false);
+		viewFrame.dispose();
+	}
+
+	/**
+	 * Tenta se conectar com o servidor Caso consigua emite uma mensagem de
+	 * afirmação e retorna para a tela principal Do contrario emite uma mensagem
+	 * de erro e continua na mesma tela
+	 */
+	 
+	private void conectar() {
+
+		String nome = nickField.getText();
+		String ipServidor = ipServidorField.getText();
+
+		// validações
+		if (nome.equals("")) {
+			JOptionPane.showMessageDialog(this.viewFrame,
+					"Você deve escolher um nome de usuário", "Erro",
+					JOptionPane.ERROR_MESSAGE, null);
+
+			return;
+		}
+		atorRede.conectar(nome, ipServidor);
+		// fecha a janela
+		this.cancelar();
+
 	}
 
 }

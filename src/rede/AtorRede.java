@@ -1,12 +1,16 @@
 package rede;
 
 import java.awt.Rectangle;
+import java.util.List;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import model.Carta;
+
 import controller.AtorJogador;
+import controller.Lance;
 
 import br.ufsc.inf.leobr.cliente.Jogada;
 import br.ufsc.inf.leobr.cliente.OuvidorProxy;
@@ -14,13 +18,11 @@ import br.ufsc.inf.leobr.cliente.Proxy;
 import br.ufsc.inf.leobr.cliente.exception.ArquivoMultiplayerException;
 import br.ufsc.inf.leobr.cliente.exception.JahConectadoException;
 import br.ufsc.inf.leobr.cliente.exception.NaoConectadoException;
+import br.ufsc.inf.leobr.cliente.exception.NaoJogandoException;
 import br.ufsc.inf.leobr.cliente.exception.NaoPossivelConectarException;
-//ESSA CLASSE REPRESENTA O ATORNETGAMES
+
 public class AtorRede implements OuvidorProxy {
 
-	
-	
-	
 	private Proxy proxy;
 	private AtorJogador atorJogador;
 	private boolean ehMinhaVez = false;
@@ -47,8 +49,6 @@ public class AtorRede implements OuvidorProxy {
 		try {
 			proxy.conectar(servidor, nome);
 		} catch (JahConectadoException e) {
-			// [FIXME] Verificar o parametro null, deveria ser a tela aonde sera
-			// mostrada a imagem
 			JOptionPane.showMessageDialog(null, e.getMessage());
 			e.printStackTrace();
 		} catch (NaoPossivelConectarException e) {
@@ -69,12 +69,17 @@ public class AtorRede implements OuvidorProxy {
 		}
 	}
 
-	// [FIXME] É necessario pensar num objeto que implemente a interface Jogada
-	// e que englobe as informacoes necessarias que devem ser enviadas ao outro
-	// jogador quando é realizada uma
-	// Jogada, para poder passo-lo como parametro deste metodo.
-	public void enviarJogada() {
-		// proxy.enviaJogada(jogada);
+	public void enviarJogada(Carta cartaSelecionada, int destino) {
+		try {
+			Lance lance = new Lance();
+			lance.setCartaSelecionada(cartaSelecionada);
+			lance.setBaseDestino(destino);
+			proxy.enviaJogada(lance);
+			ehMinhaVez = false;
+		} catch (NaoJogandoException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(atorJogador, e.getMessage());
+		}
 
 	}
 
@@ -95,13 +100,13 @@ public class AtorRede implements OuvidorProxy {
 	@Override
 	public void iniciarNovaPartida(Integer posicao) {
 		if (posicao == 1) {
-			// JOptionPane.showMessageDialog(atorJogador,
-			// "Partida Iniciada, você começa jogando!");
+			JOptionPane.showMessageDialog(atorJogador,
+					"Partida Iniciada, você começa jogando!");
 			ehMinhaVez = true;
 			atorJogador.iniciarPartidaRede(ehMinhaVez);
 		} else {
-			// JOptionPane.showMessageDialog(atorJogador,
-			// "Partida Iniciada, aguarde uma jogada");
+			 JOptionPane.showMessageDialog(atorJogador,
+			 "Partida Iniciada, aguarde uma jogada");
 			ehMinhaVez = false;
 			atorJogador.iniciarPartidaRede(ehMinhaVez);
 		}
@@ -121,7 +126,11 @@ public class AtorRede implements OuvidorProxy {
 
 	@Override
 	public void receberJogada(Jogada jogada) {
-		// TODO Auto-generated method stub
+		// Recebe uma jogada do outro lado
+		Lance lance = (Lance) jogada;
+		atorJogador.efetuarJogadaRede(lance.getCartaSelecionada(),
+				lance.getBaseDestino());
+		ehMinhaVez = true;
 
 	}
 
@@ -154,7 +163,7 @@ public class AtorRede implements OuvidorProxy {
 	public void setProxy(Proxy proxy) {
 		this.proxy = proxy;
 	}
-	
+
 	private JMenuItem getJMenuItemConectar() {
 		if (jMenuItemConectar == null) {
 			jMenuItemConectar = new JMenuItem();
@@ -169,7 +178,7 @@ public class AtorRede implements OuvidorProxy {
 		}
 		return jMenuItemConectar;
 	}
-	
+
 	protected void conectar() {
 		GuiRede ic = new GuiRede(this);
 		ic.createFront();
@@ -207,14 +216,19 @@ public class AtorRede implements OuvidorProxy {
 			jMenuItemIniciarPartidaRede.setText("Iniciar partida");
 			jMenuItemIniciarPartidaRede
 					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {	
-							if(!atorJogador.informarPartidaEmAndamento())
+						public void actionPerformed(java.awt.event.ActionEvent e) {
+							if (!atorJogador.informarPartidaEmAndamento())
 								iniciarPartidaRede();
+							
 						}
 
 					});
 		}
 		return jMenuItemIniciarPartidaRede;
+	}
+
+	public String obtemNomeAdversario() {
+		return proxy.obterNomeAdversarios().get(0);
 	}
 
 }

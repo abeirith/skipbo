@@ -2,6 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 
+import br.ufsc.inf.leobr.cliente.Jogada;
+
 import model.Jogador;
 
 public class AtorNetGamesNRT implements OuvidorProxy {
@@ -52,7 +54,7 @@ public class AtorNetGamesNRT implements OuvidorProxy {
 	 * 
 	 * @param jogada
 	 */
-	public void efetuaJogada(Jogada jogada) {
+	public void efetuaJogada(Lance jogada) {
 		throw new UnsupportedOperationException();
 	}
 

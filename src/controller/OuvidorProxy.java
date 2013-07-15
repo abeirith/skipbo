@@ -1,5 +1,7 @@
 package controller;
 
+import br.ufsc.inf.leobr.cliente.Jogada;
+
 public interface OuvidorProxy {
 
 	void iniciarNovaPartida();

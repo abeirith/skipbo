@@ -23,7 +23,7 @@ public class Proxy {
 	 * 
 	 * @param jogada
 	 */
-	public void enviarJogada(Jogada jogada) {
+	public void enviarJogada(Lance jogada) {
 		throw new UnsupportedOperationException();
 	}
 
