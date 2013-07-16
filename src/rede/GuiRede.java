@@ -45,7 +45,9 @@ public class GuiRede implements ActionListener {
 		viewFrame.add(conectarViewPanel);
 
 		viewFrame.pack();
-		viewFrame.setSize(400, 130);
+		//viewFrame.setLocationRelativeTo(null);
+		viewFrame.setBounds(600, 362, 400, 130);
+		//viewFrame.setSize(400, 130);
 		viewFrame.setVisible(true);
 
 	}

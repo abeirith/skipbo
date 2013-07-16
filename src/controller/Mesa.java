@@ -6,13 +6,19 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import br.ufsc.inf.leobr.cliente.Jogada;
+
 import model.Carta;
 import model.Estoque;
 import model.Jogador;
 import model.Monte;
 
-public class Mesa {
+public class Mesa implements Jogada {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Estoque> base;
 	private boolean mesaHabilitada;
 	private AtorJogador ajogador;
@@ -20,28 +26,19 @@ public class Mesa {
 	private List<Carta> cartasBase2;
 	private List<Carta> cartasBase3;
 	private List<Carta> cartasBase4;
-	
-	private List<Carta> cartasDescarte1;
-	private List<Carta> cartasDescarte2;
-	private List<Carta> cartasDescarte3;
-	private List<Carta> cartasDescarte4;
 
 	private Jogador jogadorLocal;
 	private Jogador jogadorRemoto;
-	private Jogador jogadorAtual;
-	protected boolean partidaEmAndamento;
+	private Jogador jogadorDaVez;
 
-	
+
+	protected boolean partidaEmAndamento;
 
 	public Mesa() {
 		setCartasBase1(new ArrayList<Carta>());
 		setCartasBase2(new ArrayList<Carta>());
 		setCartasBase3(new ArrayList<Carta>());
 		setCartasBase4(new ArrayList<Carta>());
-		setCartasDescarte1(new ArrayList<Carta>());
-		setCartasDescarte2(new ArrayList<Carta>());
-		setCartasDescarte3(new ArrayList<Carta>());
-		setCartasDescarte4(new ArrayList<Carta>());
 	}
 
 	/**
@@ -60,23 +57,21 @@ public class Mesa {
 
 	public void habilitarMesa() {
 	}
-
-	// public InterfaceLocal selecionaDescarte(int indice) {
-	// throw new UnsupportedOperationException();
-	// }
-
+	public Jogador getJogadorDaVez() {
+		return jogadorDaVez;
+	}
 	private void alternarVez(boolean haVencedor, boolean remetenteServidor) {
 		if (haVencedor) {
 			getJogadorLocal().desabilitar();
 			getJogadorRemoto().desabilitar();
 		} else if (remetenteServidor) {
-			setJogadorAtual(getJogadorLocal());
 			getJogadorLocal().habilitar();
 			getJogadorRemoto().desabilitar();
+			setJogadorDaVez(getJogadorLocal());
 		} else {
 			getJogadorLocal().desabilitar();
-			setJogadorAtual(getJogadorRemoto());
 			getJogadorRemoto().habilitar();
+			setJogadorDaVez(getJogadorRemoto());
 		}
 	}
 
@@ -91,44 +86,19 @@ public class Mesa {
 	public void verificaInicioRodada() {
 	}
 
-	/**
-	 * 
-	 * @param host
-	 * @param nome
-	 */
-	// public InterfaceLocal conectar(String host, String nome) {
-	// throw new UnsupportedOperationException();
-	// }
-	//
-	// public InterfaceLocal desconectar() {
-	// throw new UnsupportedOperationException();
-	// }
-
-	/**
-	 * 
-	 * @param mapaRede
-	 */
-	// public void receberJogada(InterfaceRede mapaRede) {
-	// throw new UnsupportedOperationException();
-	// }
-
-	/**
-	 * 
-	 * @param posicao
-	 */
 	public void iniciaJogo(int posicao) {
 	}
 
 	public void darAsCartas() {
-		 daAsCartasJogadorLocal();
-		 daAsCartasJogadorRemoto();
+		daAsCartasJogadorLocal();
+		daAsCartasJogadorRemoto();
 	}
 
 	private void daAsCartasJogadorRemoto() {
 		List<Integer> cartasSorteadasMaoRemoto;
-		 List<Integer> cartasSorteadasReservaRemoto;
+		List<Integer> cartasSorteadasReservaRemoto;
 		List<Carta> cartasMaoRemoto = new ArrayList<>();
-		cartasSorteadasMaoRemoto = sorteiaCartasMao();
+		cartasSorteadasMaoRemoto = sorteiaCartasMao(5);
 		Carta cartaMaoRemoto = null;
 		for (Integer numeroCarta : cartasSorteadasMaoRemoto) {
 			cartaMaoRemoto = new Carta(numeroCarta);
@@ -147,9 +117,9 @@ public class Mesa {
 
 	private void daAsCartasJogadorLocal() {
 		List<Integer> cartasSorteadasMaoLocal;
-		 List<Integer> cartasSorteadasReservaLocal;
+		List<Integer> cartasSorteadasReservaLocal;
 		List<Carta> cartasMaoLocal = new ArrayList<>();
-		cartasSorteadasMaoLocal = sorteiaCartasMao();
+		cartasSorteadasMaoLocal = sorteiaCartasMao(5);
 		Carta cartaMaoLocal = null;
 		for (Integer numeroCarta : cartasSorteadasMaoLocal) {
 			cartaMaoLocal = new Carta(numeroCarta);
@@ -180,11 +150,11 @@ public class Mesa {
 		return cartasSorteadasReserva;
 	}
 
-	private List<Integer> sorteiaCartasMao() {
+	private List<Integer> sorteiaCartasMao(int qtCartasSortear) {
 		List<Integer> cartasSorteadasMao = new ArrayList<>();
 		Integer numero = null;
 		;
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < qtCartasSortear; i++) {
 			numero = (int) (0 + (Math.random() * 12)); // sorteia numeros entre
 														// 0 e 12(0 é a skipBo)
 			cartasSorteadasMao.add(numero);
@@ -215,7 +185,6 @@ public class Mesa {
 
 	}
 
-
 	public boolean tratarInsercaoNaMesa(Carta cartaSelecionada,
 			int baseSelecionada, boolean remetenteServidor) {
 		boolean ok = false;
@@ -245,35 +214,31 @@ public class Mesa {
 		}
 		return ok;
 	}
-	
-	public void insereNoDescarte(Carta cartaSelecionada, int descarteSelecionado, boolean remetenteServidor) {
-		
+
+	public void insereNoDescarte(Carta cartaSelecionada,
+			int descarteSelecionado, boolean remetenteServidor) {
+
 		switch (descarteSelecionado) {
 		case 1:
-			getCartasDescarte1().add(cartaSelecionada);
-			alternarVez(verificarVencedor(remetenteServidor),
-					remetenteServidor);
+			jogadorLocal.getPilhaDescarte1().add(cartaSelecionada);
+			alternarVez(verificarVencedor(remetenteServidor), remetenteServidor);
 			break;
 		case 2:
-			getCartasDescarte2().add(cartaSelecionada);
-			alternarVez(verificarVencedor(remetenteServidor),
-					remetenteServidor);
+			jogadorLocal.getPilhaDescarte2().add(cartaSelecionada);
+			alternarVez(verificarVencedor(remetenteServidor), remetenteServidor);
 			break;
 		case 3:
-			getCartasDescarte3().add(cartaSelecionada);
-			alternarVez(verificarVencedor(remetenteServidor),
-					remetenteServidor);
+			jogadorLocal.getPilhaDescarte3().add(cartaSelecionada);
+			alternarVez(verificarVencedor(remetenteServidor), remetenteServidor);
 			break;
 		case 4:
-			getCartasDescarte4().add(cartaSelecionada);
-			alternarVez(verificarVencedor(remetenteServidor),
-					remetenteServidor);
+			jogadorLocal.getPilhaDescarte4().add(cartaSelecionada);
+			alternarVez(verificarVencedor(remetenteServidor), remetenteServidor);
 			break;
 		default:
 			break;
 		}
-	
-		
+
 	}
 
 	private boolean verificarVencedor(boolean remetenteServidor) {
@@ -340,7 +305,7 @@ public class Mesa {
 
 	private void cartaBaseChegouADoze(List<Carta> cartasBase) {
 		if (cartasBase.size() == 12) {
-			//completou a base;
+			// completou a base;
 			cartasBase.clear();
 		}
 	}
@@ -358,21 +323,10 @@ public class Mesa {
 
 	/**
 	 * 
-	 * @param idJog
-	 */
-	public void setJogadorDaVez(int idJog) {
-	}
-
-	public void getJogadorDaVez() {
-	}
-
-	/**
-	 * 
 	 * @param msg
 	 */
 	public void setMensagem(int msg) {
 	}
-
 
 	public ArrayList<Estoque> getBase() {
 		return base;
@@ -408,10 +362,8 @@ public class Mesa {
 		getJogadorLocal().reiniciar();
 		getJogadorRemoto().reiniciar();
 		if (primeiro == 1) {
-			setJogadorAtual(getJogadorLocal());
 			getJogadorLocal().habilitar();
 		} else {
-			setJogadorAtual(getJogadorRemoto());
 			getJogadorRemoto().habilitar();
 		}
 
@@ -478,45 +430,43 @@ public class Mesa {
 		this.jogadorRemoto = jogadorRemoto;
 	}
 
-	public Jogador getJogadorAtual() {
-		return jogadorAtual;
+
+	public List<Carta> verificaNecessidadeDeCartas(List<Carta> mao) {
+		int tamanhoMao = mao.size();
+		List<Integer> cartasSorteadasMaoLocal =null;
+		List<Carta> cartasMaoLocal = new ArrayList<>();
+		Carta cartaMaoLocal = null;
+
+		switch (tamanhoMao) {
+		case 0:
+			cartasSorteadasMaoLocal = sorteiaCartasMao(5);
+			break;
+		case 1:
+			cartasSorteadasMaoLocal = sorteiaCartasMao(4);
+			break;
+		case 2:
+			cartasSorteadasMaoLocal = sorteiaCartasMao(3);
+			break;
+		case 3:
+			cartasSorteadasMaoLocal = sorteiaCartasMao(2);
+		case 4:
+			cartasSorteadasMaoLocal = sorteiaCartasMao(1);
+		default:
+			break;
+		}
+		if (tamanhoMao !=5) {
+			for (Integer numeroCarta : cartasSorteadasMaoLocal) {
+				cartaMaoLocal = new Carta(numeroCarta);
+				cartasMaoLocal.add(cartaMaoLocal);
+			}
+			
+			jogadorDaVez.setMao(cartasMaoLocal);
+		}
+		return jogadorDaVez.getMao();
 	}
 
-	public void setJogadorAtual(Jogador jogadorAtual) {
-		this.jogadorAtual = jogadorAtual;
+	public void setJogadorDaVez(Jogador jogadorDaVez) {
+		this.jogadorDaVez = jogadorDaVez;
 	}
-
-	public List<Carta> getCartasDescarte1() {
-		return cartasDescarte1;
-	}
-
-	public void setCartasDescarte1(List<Carta> cartasDescarte1) {
-		this.cartasDescarte1 = cartasDescarte1;
-	}
-
-	public List<Carta> getCartasDescarte2() {
-		return cartasDescarte2;
-	}
-
-	public void setCartasDescarte2(List<Carta> cartasDescarte2) {
-		this.cartasDescarte2 = cartasDescarte2;
-	}
-
-	public List<Carta> getCartasDescarte3() {
-		return cartasDescarte3;
-	}
-
-	public void setCartasDescarte3(List<Carta> cartasDescarte3) {
-		this.cartasDescarte3 = cartasDescarte3;
-	}
-
-	public List<Carta> getCartasDescarte4() {
-		return cartasDescarte4;
-	}
-
-	public void setCartasDescarte4(List<Carta> cartasDescarte4) {
-		this.cartasDescarte4 = cartasDescarte4;
-	}
-
 
 }

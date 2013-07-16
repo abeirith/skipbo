@@ -11,6 +11,7 @@ import model.Carta;
 
 import controller.AtorJogador;
 import controller.Lance;
+import controller.Mesa;
 
 import br.ufsc.inf.leobr.cliente.Jogada;
 import br.ufsc.inf.leobr.cliente.OuvidorProxy;
@@ -69,13 +70,18 @@ public class AtorRede implements OuvidorProxy {
 		}
 	}
 
-	public void enviarJogada(Carta cartaSelecionada, int destino) {
+	public void enviarJogada(Mesa mesa, int destino) {
 		try {
-			Lance lance = new Lance();
-			lance.setCartaSelecionada(cartaSelecionada);
-			lance.setBaseDestino(destino);
-			proxy.enviaJogada(lance);
-			ehMinhaVez = false;
+//			Lance lance = new Lance();
+//			lance.setCartaSelecionada(cartaSelecionada);
+//			lance.setBaseDestino(destino);
+			proxy.enviaJogada(mesa);
+//			if (destino == 0) {
+//				ehMinhaVez=false;
+//			}else{
+//				ehMinhaVez =true;
+//			}
+			ehMinhaVez =false;
 		} catch (NaoJogandoException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(atorJogador, e.getMessage());
@@ -103,56 +109,56 @@ public class AtorRede implements OuvidorProxy {
 			JOptionPane.showMessageDialog(atorJogador,
 					"Partida Iniciada, você começa jogando!");
 			ehMinhaVez = true;
-			atorJogador.iniciarPartidaRede(ehMinhaVez);
 		} else {
-			 JOptionPane.showMessageDialog(atorJogador,
-			 "Partida Iniciada, aguarde uma jogada");
+			JOptionPane.showMessageDialog(atorJogador,
+					"Partida Iniciada, aguarde uma jogada");
 			ehMinhaVez = false;
-			atorJogador.iniciarPartidaRede(ehMinhaVez);
 		}
+		atorJogador.iniciarPartidaRede(ehMinhaVez);
 	}
 
 	@Override
 	public void finalizarPartidaComErro(String message) {
-		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(atorJogador, message);
 
 	}
 
 	@Override
 	public void receberMensagem(String msg) {
-		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(atorJogador,
+				"Mensagem recebida do servidor:" + msg);
 
 	}
 
 	@Override
 	public void receberJogada(Jogada jogada) {
 		// Recebe uma jogada do outro lado
-		Lance lance = (Lance) jogada;
-		atorJogador.efetuarJogadaRede(lance.getCartaSelecionada(),
-				lance.getBaseDestino());
-		ehMinhaVez = true;
-
+		Mesa mesa = (Mesa) jogada;
+//		Lance lance = (Lance) jogada;
+//		atorJogador.efetuarJogadaRede(lance.getCartaSelecionada(),
+//				lance.getBaseDestino());
+		atorJogador.efetuarJogadaRede(mesa);
+		ehMinhaVez =true;
+//		if (lance.getBaseDestino() == 0) {
+//			ehMinhaVez = true;
+//		}else{
+//			ehMinhaVez = false;
+//		}
 	}
 
 	@Override
 	public void tratarConexaoPerdida() {
-		// JOptionPane.showMessageDialog(atorJogador,
-		// "A partida não pode ser iniciada devido ao seguinte erro: "
-		// + message);
+		JOptionPane.showMessageDialog(atorJogador,
+				"A partida não pode ser iniciada devido ao seguinte erro: "
+						+ "A conexão com o servidor foi perdida, por favor tente novamente mais tarde.");
 
 	}
 
 	@Override
 	public void tratarPartidaNaoIniciada(String message) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(atorJogador,
+				"A partida não pode ser iniciada devido ao seguinte erro: "
+						+ message);
 
 	}
 
@@ -219,7 +225,7 @@ public class AtorRede implements OuvidorProxy {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
 							if (!atorJogador.informarPartidaEmAndamento())
 								iniciarPartidaRede();
-							
+
 						}
 
 					});
