@@ -1,4 +1,5 @@
-package controller;
+package interface_grafica;
+
 
 import javax.swing.JFrame;
 

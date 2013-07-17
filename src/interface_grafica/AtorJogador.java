@@ -1,4 +1,4 @@
-package controller;
+package interface_grafica;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,14 +14,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import dominio_do_problema.Carta;
+import dominio_do_problema.Mesa;
+
 import br.ufsc.inf.leobr.cliente.Proxy;
 
-import model.Carta;
 
 import rede.AtorRede;
 
-import view.PainelInformacoes;
-import view.TelaPrincipal;
 import java.util.List;
 
 public class AtorJogador extends JFrame {

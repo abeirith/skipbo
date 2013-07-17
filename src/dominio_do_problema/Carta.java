@@ -1,4 +1,4 @@
-package model;
+package dominio_do_problema;
 
 import br.ufsc.inf.leobr.cliente.Jogada;
 

@@ -52,7 +52,6 @@ public class GuiRede implements ActionListener {
 	}
 
 	public void createPanel() {
-		// Insere os elementos de campos e labels no painel de campos
 		camposViewPanel.setLayout(new GridLayout(2, 2, 2, 2));
 
 		camposViewPanel.add(nickLabel);
@@ -61,11 +60,9 @@ public class GuiRede implements ActionListener {
 		camposViewPanel.add(ipServidorLabel);
 		camposViewPanel.add(ipServidorField);
 
-		// Define os listeners dos botões
 		contectarButton.addActionListener(this);
 		cancelarButton.addActionListener(this);
 
-		// Insere os elementos de botões no painel de botões
 		botoesViewPanel.add(contectarButton);
 		botoesViewPanel.add(cancelarButton);
 
@@ -92,20 +89,11 @@ public class GuiRede implements ActionListener {
 
 	}
 
-	/**
-	 * Retorna para a tela principal
-	 */
 	private void cancelar() {
 		viewFrame.setVisible(false);
 		viewFrame.dispose();
 	}
 
-	/**
-	 * Tenta se conectar com o servidor Caso consigua emite uma mensagem de
-	 * afirmação e retorna para a tela principal Do contrario emite uma mensagem
-	 * de erro e continua na mesma tela
-	 */
-	 
 	private void conectar() {
 
 		String nome = nickField.getText();

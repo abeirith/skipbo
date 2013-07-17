@@ -1,15 +1,16 @@
-package controller;
+package dominio_do_problema;
+
+import interface_grafica.AtorJogador;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
+
+
 import br.ufsc.inf.leobr.cliente.Jogada;
 
-import model.Carta;
-import model.Estoque;
-import model.Jogador;
 
 public class Mesa implements Jogada {
 

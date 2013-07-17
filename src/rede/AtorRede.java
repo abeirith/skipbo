@@ -1,5 +1,7 @@
 package rede;
 
+import interface_grafica.AtorJogador;
+
 import java.awt.Rectangle;
 
 import javax.swing.JMenu;
@@ -7,8 +9,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 
-import controller.AtorJogador;
-import controller.Mesa;
+import dominio_do_problema.Mesa;
 
 import br.ufsc.inf.leobr.cliente.Jogada;
 import br.ufsc.inf.leobr.cliente.OuvidorProxy;
@@ -124,7 +125,6 @@ public class AtorRede implements OuvidorProxy {
 
 	@Override
 	public void receberJogada(Jogada jogada) {
-		// Recebe uma jogada do outro lado
 		Mesa mesa = (Mesa) jogada;
 		if(mesa.getJogadorDaVez().isVencedor()){
 			JOptionPane.showMessageDialog(null, "Jogador: "+ mesa.getJogadorDaVez().getNome() + " venceu !!");
@@ -137,14 +137,12 @@ public class AtorRede implements OuvidorProxy {
 		
 		atorJogador.efetuarJogadaRede(mesa);
 		ehMinhaVez =true;
-//		}
 	}
 
 	@Override
 	public void tratarConexaoPerdida() {
 		JOptionPane.showMessageDialog(atorJogador,
-				"A partida não pode ser iniciada devido ao seguinte erro: "
-						+ "A conexão com o servidor foi perdida, por favor tente novamente mais tarde.");
+				"A partida não pode ser iniciada devido ao seguinte erro: A conexão com o servidor foi perdida, por favor tente novamente mais tarde.");
 
 	}
 

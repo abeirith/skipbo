@@ -1,7 +1,8 @@
-package model;
+package dominio_do_problema;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 import br.ufsc.inf.leobr.cliente.Jogada;
 
