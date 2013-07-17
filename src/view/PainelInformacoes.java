@@ -53,7 +53,7 @@ public class PainelInformacoes extends JDialog {
 		add(lb5);
 		add(lb6);
 		setLocationRelativeTo(null);
-		setTitle("Sobre");
+		setTitle("Info. equipe");
 		setPreferredSize(new Dimension(400,200));
 	}
 }

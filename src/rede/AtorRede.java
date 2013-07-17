@@ -1,16 +1,13 @@
 package rede;
 
 import java.awt.Rectangle;
-import java.util.List;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import model.Carta;
 
 import controller.AtorJogador;
-import controller.Lance;
 import controller.Mesa;
 
 import br.ufsc.inf.leobr.cliente.Jogada;
@@ -72,15 +69,10 @@ public class AtorRede implements OuvidorProxy {
 
 	public void enviarJogada(Mesa mesa, int destino) {
 		try {
-//			Lance lance = new Lance();
-//			lance.setCartaSelecionada(cartaSelecionada);
-//			lance.setBaseDestino(destino);
 			proxy.enviaJogada(mesa);
-//			if (destino == 0) {
-//				ehMinhaVez=false;
-//			}else{
-//				ehMinhaVez =true;
-//			}
+			if (mesa.getJogadorDaVez().isVencedor()) {
+				JOptionPane.showMessageDialog(null, "Você venceu!!");
+			}
 			ehMinhaVez =false;
 		} catch (NaoJogandoException e) {
 			e.printStackTrace();
@@ -134,15 +126,17 @@ public class AtorRede implements OuvidorProxy {
 	public void receberJogada(Jogada jogada) {
 		// Recebe uma jogada do outro lado
 		Mesa mesa = (Mesa) jogada;
-//		Lance lance = (Lance) jogada;
-//		atorJogador.efetuarJogadaRede(lance.getCartaSelecionada(),
-//				lance.getBaseDestino());
+		if(mesa.getJogadorDaVez().isVencedor()){
+			JOptionPane.showMessageDialog(null, "Jogador: "+ mesa.getJogadorDaVez().getNome() + " venceu !!");
+		}
+		if(mesa.getJogadorDaVez() == mesa.getJogadorLocal()){
+			mesa.setJogadorDaVez(mesa.getJogadorRemoto());
+		}else{
+			mesa.setJogadorDaVez(mesa.getJogadorLocal());
+		}
+		
 		atorJogador.efetuarJogadaRede(mesa);
 		ehMinhaVez =true;
-//		if (lance.getBaseDestino() == 0) {
-//			ehMinhaVez = true;
-//		}else{
-//			ehMinhaVez = false;
 //		}
 	}
 

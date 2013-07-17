@@ -3,49 +3,53 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufsc.inf.leobr.cliente.Jogada;
 
-public class Estoque extends Baralho {
+public class Estoque implements Jogada{
 	
-	private List<Carta> cartasBase = new ArrayList<>();
+	private static final long serialVersionUID = 1L;
+	private List<Carta> pilhaDescarte1;
+	private List<Carta> pilhaDescarte2;
+	private List<Carta> pilhaDescarte3;
+	private List<Carta> pilhaDescarte4;
 
-	/**
-	 * 
-	 * @param gerar
-	 */
-	public Estoque(int gerar) {
-		throw new UnsupportedOperationException();
+	public Estoque() {
+		
+		setPilhaDescarte1(new ArrayList<Carta>());
+		setPilhaDescarte2(new ArrayList<Carta>());
+		setPilhaDescarte3(new ArrayList<Carta>());
+		setPilhaDescarte4(new ArrayList<Carta>());
 	}
 
-	public Carta removerCarta() {
-		throw new UnsupportedOperationException();
+	public List<Carta> getPilhaDescarte1() {
+		return pilhaDescarte1;
 	}
 
-	public int getTamanhoEstoque() {
-		throw new UnsupportedOperationException();
+	public void setPilhaDescarte1(List<Carta> pilhaDescarte1) {
+		this.pilhaDescarte1 = pilhaDescarte1;
 	}
 
-	public Estoque getEstoque() {
-		throw new UnsupportedOperationException();
+	public List<Carta> getPilhaDescarte2() {
+		return pilhaDescarte2;
 	}
 
-	/**
-	 * 
-	 * @param cartas
-	 */
-	public void setEstoque(ArrayList<Carta> cartas) {
-		throw new UnsupportedOperationException();
+	public void setPilhaDescarte2(List<Carta> pilhaDescarte2) {
+		this.pilhaDescarte2 = pilhaDescarte2;
 	}
 
-	public Carta entregaCarta() {
-		throw new UnsupportedOperationException();
+	public List<Carta> getPilhaDescarte3() {
+		return pilhaDescarte3;
 	}
 
-	public List<Carta> getCartasBase() {
-		return cartasBase;
+	public void setPilhaDescarte3(List<Carta> pilhaDescarte3) {
+		this.pilhaDescarte3 = pilhaDescarte3;
 	}
 
-	public void setCartasBase(List<Carta> cartasBase) {
-		this.cartasBase = cartasBase;
+	public List<Carta> getPilhaDescarte4() {
+		return pilhaDescarte4;
 	}
 
+	public void setPilhaDescarte4(List<Carta> pilhaDescarte4) {
+		this.pilhaDescarte4 = pilhaDescarte4;
+	}
 }

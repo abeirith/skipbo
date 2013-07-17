@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -76,7 +75,8 @@ public class AtorJogador extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (atorRede.ehMinhaVez()) {
-					cartaSelecionada = getMesa().getJogadorLocal().getMao().get(0);
+					cartaSelecionada = getMesa().getJogadorDaVez().getMao()
+							.get(0);
 					cartaVeioDaMao1();
 					carta1.setBorder(BorderFactory.createBevelBorder(1));
 					carta2.setBorder(null);
@@ -108,7 +108,8 @@ public class AtorJogador extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (atorRede.ehMinhaVez()) {
-					cartaSelecionada = getMesa().getJogadorLocal().getMao().get(1);
+					cartaSelecionada = getMesa().getJogadorDaVez().getMao()
+							.get(1);
 					cartaVeioDaMao2();
 					carta1.setBorder(null);
 					carta2.setBorder(BorderFactory.createBevelBorder(1));
@@ -139,7 +140,8 @@ public class AtorJogador extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (atorRede.ehMinhaVez()) {
-					cartaSelecionada = getMesa().getJogadorLocal().getMao().get(2);
+					cartaSelecionada = getMesa().getJogadorDaVez().getMao()
+							.get(2);
 					cartaVeioDaMao3();
 					carta1.setBorder(null);
 					carta2.setBorder(null);
@@ -171,7 +173,8 @@ public class AtorJogador extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (atorRede.ehMinhaVez()) {
-					cartaSelecionada = getMesa().getJogadorLocal().getMao().get(3);
+					cartaSelecionada = getMesa().getJogadorDaVez().getMao()
+							.get(3);
 					cartaVeioDaMao4();
 					carta1.setBorder(null);
 					carta2.setBorder(null);
@@ -203,7 +206,8 @@ public class AtorJogador extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (atorRede.ehMinhaVez()) {
-					cartaSelecionada = getMesa().getJogadorLocal().getMao().get(4);
+					cartaSelecionada = getMesa().getJogadorDaVez().getMao()
+							.get(4);
 					cartaVeioDaMao5();
 					carta1.setBorder(null);
 					carta2.setBorder(null);
@@ -236,9 +240,9 @@ public class AtorJogador extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (atorRede.ehMinhaVez()) {
 					cartaSelecionada = getMesa()
-							.getJogadorLocal()
+							.getJogadorDaVez()
 							.getPilhaReserva()
-							.get(getMesa().getJogadorLocal().getPilhaReserva()
+							.get(getMesa().getJogadorDaVez().getPilhaReserva()
 									.size() - 1);
 					cartaVeioDaReserva();
 					carta1.setBorder(null);
@@ -274,32 +278,31 @@ public class AtorJogador extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (atorRede.ehMinhaVez()) {
-					boolean ok = getMesa().tratarInsercaoNaMesa(cartaSelecionada, 1,
-							false);
+					boolean ok = getMesa().tratarInsercaoNaMesa(
+							cartaSelecionada, 1, false);
 					if (ok) {
 						base1.setIcon(new ImageIcon(getClass()
 								.getResource(
 										"/view/view.imagens/carta"
 												+ cartaSelecionada.getNumero()
 												+ ".png")));
-						verificaOrigemCarta = getMesa().getJogadorLocal()
+						verificaOrigemCarta = getMesa().getJogadorDaVez()
 								.removeCartaSelecionada(cartaSelecionada);
 						if (verificaOrigemCarta == 5) {
-							atualizaCartasMao(getMesa().getJogadorLocal().getMao());
+							atualizaCartasMao(getMesa().getJogadorDaVez()
+									.getMao());
 						} else if (verificaOrigemCarta == 0) {
-							atualizaCartasReserva(getMesa().getJogadorLocal()
+							atualizaCartasReserva(getMesa().getJogadorDaVez()
 									.getPilhaReserva());
 						} else {
 							atualizaPilhaDescarte(verificaOrigemCarta);
 						}
-						 //atorRede.enviarJogada(cartaSelecionada, 1);
 						cartaSelecionada = null;
 					}
 				} else {
 					informaVezDoAdversario();
 				}
 			}
-
 		});
 
 		base2 = new JLabel();
@@ -309,8 +312,8 @@ public class AtorJogador extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (atorRede.ehMinhaVez()) {
-					boolean ok = getMesa().tratarInsercaoNaMesa(cartaSelecionada, 2,
-							false);
+					boolean ok = getMesa().tratarInsercaoNaMesa(
+							cartaSelecionada, 2, false);
 					if (ok) {
 						base2.setIcon(new ImageIcon(getClass()
 								.getResource(
@@ -318,18 +321,19 @@ public class AtorJogador extends JFrame {
 												+ cartaSelecionada.getNumero()
 												+ ".png")));
 						// limpaIconeOrigemDaCarta();
-						 
-						verificaOrigemCarta = getMesa().getJogadorLocal()
+
+						verificaOrigemCarta = getMesa().getJogadorDaVez()
 								.removeCartaSelecionada(cartaSelecionada);
 						if (verificaOrigemCarta == 5) {
-							atualizaCartasMao(getMesa().getJogadorLocal().getMao());
+							atualizaCartasMao(getMesa().getJogadorDaVez()
+									.getMao());
 						} else if (verificaOrigemCarta == 0) {
-							atualizaCartasReserva(getMesa().getJogadorLocal()
+							atualizaCartasReserva(getMesa().getJogadorDaVez()
 									.getPilhaReserva());
 						} else {
 							atualizaPilhaDescarte(verificaOrigemCarta);
 						}
-						//atorRede.enviarJogada(cartaSelecionada, 2);
+						// atorRede.enviarJogada(cartaSelecionada, 2);
 						cartaSelecionada = null;
 					}
 				} else {
@@ -345,26 +349,25 @@ public class AtorJogador extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (atorRede.ehMinhaVez()) {
-					boolean ok = getMesa().tratarInsercaoNaMesa(cartaSelecionada, 3,
-							false);
+					boolean ok = getMesa().tratarInsercaoNaMesa(
+							cartaSelecionada, 3, false);
 					if (ok) {
 						base3.setIcon(new ImageIcon(getClass()
 								.getResource(
 										"/view/view.imagens/carta"
 												+ cartaSelecionada.getNumero()
 												+ ".png")));
-						// limpaIconeOrigemDaCarta();
-						verificaOrigemCarta = getMesa().getJogadorLocal()
+						verificaOrigemCarta = getMesa().getJogadorDaVez()
 								.removeCartaSelecionada(cartaSelecionada);
 						if (verificaOrigemCarta == 5) {
-							atualizaCartasMao(getMesa().getJogadorLocal().getMao());
+							atualizaCartasMao(getMesa().getJogadorDaVez()
+									.getMao());
 						} else if (verificaOrigemCarta == 0) {
-							atualizaCartasReserva(getMesa().getJogadorLocal()
+							atualizaCartasReserva(getMesa().getJogadorDaVez()
 									.getPilhaReserva());
 						} else {
 							atualizaPilhaDescarte(verificaOrigemCarta);
 						}
-						//atorRede.enviarJogada(cartaSelecionada, 3);
 						cartaSelecionada = null;
 					}
 				} else {
@@ -380,26 +383,25 @@ public class AtorJogador extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (atorRede.ehMinhaVez()) {
-					boolean ok = getMesa().tratarInsercaoNaMesa(cartaSelecionada, 4,
-							false);
+					boolean ok = getMesa().tratarInsercaoNaMesa(
+							cartaSelecionada, 4, false);
 					if (ok) {
 						base4.setIcon(new ImageIcon(getClass()
 								.getResource(
 										"/view/view.imagens/carta"
 												+ cartaSelecionada.getNumero()
 												+ ".png")));
-						// limpaIconeOrigemDaCarta();
-						verificaOrigemCarta = getMesa().getJogadorLocal()
+						verificaOrigemCarta = getMesa().getJogadorDaVez()
 								.removeCartaSelecionada(cartaSelecionada);
 						if (verificaOrigemCarta == 5) {
-							atualizaCartasMao(getMesa().getJogadorLocal().getMao());
+							atualizaCartasMao(getMesa().getJogadorDaVez()
+									.getMao());
 						} else if (verificaOrigemCarta == 0) {
-							atualizaCartasReserva(getMesa().getJogadorLocal()
+							atualizaCartasReserva(getMesa().getJogadorDaVez()
 									.getPilhaReserva());
 						} else {
 							atualizaPilhaDescarte(verificaOrigemCarta);
 						}
-					//	atorRede.enviarJogada(cartaSelecionada, 4);
 						cartaSelecionada = null;
 					}
 				} else {
@@ -416,41 +418,57 @@ public class AtorJogador extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (atorRede.ehMinhaVez()) {
 					if (cartaSelecionada == null) {
-						cartaSelecionada = getMesa()
-								.getJogadorLocal()
-								.getPilhaDescarte1()
-								.get(getMesa().getJogadorLocal().getPilhaDescarte1()
-										.size() - 1);
-						cartaVeioDoDescarte1();
-						carta1.setBorder(null);
-						carta2.setBorder(null);
-						carta3.setBorder(null);
-						carta4.setBorder(null);
-						carta5.setBorder(null);
-						pilhaDescarte1.setBorder(BorderFactory
-								.createBevelBorder(1));
-						pilhaReserva1Icon.setBorder(null);
-						pilhaDescarte2.setBorder(null);
-						pilhaDescarte3.setBorder(null);
-						pilhaDescarte4.setBorder(null);
+						if (getMesa().getJogadorDaVez().getEstoque()
+								.getPilhaDescarte1().size() != 0) {
+							cartaSelecionada = getMesa()
+									.getJogadorDaVez()
+									.getEstoque()
+									.getPilhaDescarte1()
+									.get(getMesa().getJogadorDaVez()
+											.getEstoque().getPilhaDescarte1()
+											.size() - 1);
+							cartaVeioDoDescarte1();
+							clickBordaElevadaDescarte1();
+						} else {
+							cartaSelecionada = null;
+						}
 					} else {
-						pilhaDescarte1.setIcon(new ImageIcon(getClass()
-								.getResource(
-										"/view/view.imagens/carta"
-												+ cartaSelecionada.getNumero()
-												+ ".png")));
-						// atorRede.enviarJogada(cartaSelecionada, 0);
-						// atorRede.enviarJogada(mesa, 0);
-						getMesa().insereNoDescarte(cartaSelecionada, 1, false);
-						getMesa().getJogadorLocal().removeCartaSelecionada(
-								cartaSelecionada);
-						atualizaCartasMao(getMesa().getJogadorLocal().getMao());
-						atorRede.enviarJogada(getMesa(), 0);
-						cartaSelecionada = null;
+						if (mesa.verificaSeCartaNaoVeioDaReserva(cartaSelecionada)) {
+							pilhaDescarte1.setIcon(new ImageIcon(getClass()
+									.getResource(
+											"/view/view.imagens/carta"
+													+ cartaSelecionada
+															.getNumero()
+													+ ".png")));
+							getMesa().insereNoDescarte(cartaSelecionada, 1,
+									false);
+							getMesa().getJogadorDaVez().removeCartaSelecionada(
+									cartaSelecionada);
+							atualizaCartasMao(getMesa().getJogadorDaVez()
+									.getMao());
+							atorRede.enviarJogada(getMesa(), 0);
+							cartaSelecionada = null;
+							informaVez.setText("Não é sua vez");
+							informaVez.setForeground(Color.RED);
+						}
 					}
 				} else {
 					informaVezDoAdversario();
 				}
+			}
+
+			private void clickBordaElevadaDescarte1() {
+				carta1.setBorder(null);
+				carta2.setBorder(null);
+				carta3.setBorder(null);
+				carta4.setBorder(null);
+				carta5.setBorder(null);
+				pilhaDescarte1.setBorder(BorderFactory
+						.createBevelBorder(1));
+				pilhaReserva1Icon.setBorder(null);
+				pilhaDescarte2.setBorder(null);
+				pilhaDescarte3.setBorder(null);
+				pilhaDescarte4.setBorder(null);
 			}
 
 			private void cartaVeioDoDescarte1() {
@@ -476,39 +494,71 @@ public class AtorJogador extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (atorRede.ehMinhaVez()) {
 					if (cartaSelecionada == null) {
-						cartaSelecionada = getMesa()
-								.getJogadorLocal()
-								.getPilhaDescarte2()
-								.get(getMesa().getJogadorLocal().getPilhaDescarte1()
-										.size() - 1);
-						carta1.setBorder(null);
-						carta2.setBorder(null);
-						carta3.setBorder(null);
-						carta4.setBorder(null);
-						carta5.setBorder(null);
-						pilhaReserva1Icon.setBorder(null);
-						pilhaDescarte2.setBorder(BorderFactory
-								.createBevelBorder(1));
-						pilhaDescarte1.setBorder(null);
-						pilhaDescarte3.setBorder(null);
-						pilhaDescarte4.setBorder(null);
+						if (getMesa().getJogadorDaVez().getEstoque()
+								.getPilhaDescarte2().size() != 0) {
+							cartaSelecionada = getMesa()
+									.getJogadorDaVez()
+									.getEstoque()
+									.getPilhaDescarte2()
+									.get(getMesa().getJogadorDaVez()
+											.getEstoque().getPilhaDescarte2()
+											.size() - 1);
+							cartaVeioDoDescarte2();
+							clickBordaElevadaDescarte2();
+						} else {
+							cartaSelecionada = null;
+						}
 					} else {
-						pilhaDescarte2.setIcon(new ImageIcon(getClass()
-								.getResource(
-										"/view/view.imagens/carta"
-												+ cartaSelecionada.getNumero()
-												+ ".png")));
-						// atorRede.enviarJogada(cartaSelecionada, 0);
-						getMesa().insereNoDescarte(cartaSelecionada, 2, false);
-						getMesa().getJogadorLocal().removeCartaSelecionada(
-								cartaSelecionada);
-						atualizaCartasMao(getMesa().getJogadorLocal().getMao());
-						atorRede.enviarJogada(getMesa(), 0);
-						cartaSelecionada = null;
+						if (mesa.verificaSeCartaNaoVeioDaReserva(cartaSelecionada)) {
+							pilhaDescarte2.setIcon(new ImageIcon(getClass()
+									.getResource(
+											"/view/view.imagens/carta"
+													+ cartaSelecionada
+															.getNumero()
+													+ ".png")));
+							// atorRede.enviarJogada(cartaSelecionada, 0);
+							getMesa().insereNoDescarte(cartaSelecionada, 2,
+									false);
+							getMesa().getJogadorDaVez().removeCartaSelecionada(
+									cartaSelecionada);
+							atualizaCartasMao(getMesa().getJogadorDaVez()
+									.getMao());
+							atorRede.enviarJogada(getMesa(), 0);
+							cartaSelecionada = null;
+							informaVez.setText("Não é sua vez");
+							informaVez.setForeground(Color.RED);
+						}
 					}
 				} else {
 					informaVezDoAdversario();
 				}
+			}
+
+			private void clickBordaElevadaDescarte2() {
+				carta1.setBorder(null);
+				carta2.setBorder(null);
+				carta3.setBorder(null);
+				carta4.setBorder(null);
+				carta5.setBorder(null);
+				pilhaReserva1Icon.setBorder(null);
+				pilhaDescarte2.setBorder(BorderFactory
+						.createBevelBorder(1));
+				pilhaDescarte1.setBorder(null);
+				pilhaDescarte3.setBorder(null);
+				pilhaDescarte4.setBorder(null);
+			}
+
+			private void cartaVeioDoDescarte2() {
+				cartaSelecionada.setEhMao1(false);
+				cartaSelecionada.setEhMao2(false);
+				cartaSelecionada.setEhMao3(false);
+				cartaSelecionada.setEhMao4(false);
+				cartaSelecionada.setEhMao5(false);
+				cartaSelecionada.setEhDaReserva(false);
+				cartaSelecionada.setEhDoDescarte1(false);
+				cartaSelecionada.setEhDoDescarte2(true);
+				cartaSelecionada.setEhDoDescarte3(false);
+				cartaSelecionada.setEhDoDescarte4(false);
 			}
 		});
 
@@ -520,39 +570,67 @@ public class AtorJogador extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (atorRede.ehMinhaVez()) {
 					if (cartaSelecionada == null) {
-						cartaSelecionada = getMesa()
-								.getJogadorLocal()
-								.getPilhaDescarte3()
-								.get(getMesa().getJogadorLocal().getPilhaDescarte1()
-										.size() - 1);
-						carta1.setBorder(null);
-						carta2.setBorder(null);
-						carta3.setBorder(null);
-						carta4.setBorder(null);
-						carta5.setBorder(null);
-						pilhaReserva1Icon.setBorder(null);
-						pilhaDescarte3.setBorder(BorderFactory
-								.createBevelBorder(1));
-						pilhaDescarte1.setBorder(null);
-						pilhaDescarte2.setBorder(null);
-						pilhaDescarte4.setBorder(null);
+						if (getMesa().getJogadorDaVez().getEstoque()
+								.getPilhaDescarte3().size() != 0) {
+							cartaSelecionada = getMesa()
+									.getJogadorDaVez()
+									.getEstoque()
+									.getPilhaDescarte3()
+									.get(getMesa().getJogadorDaVez()
+											.getEstoque().getPilhaDescarte3()
+											.size() - 1);
+							cartaVeioDoDescarte3();
+							carta1.setBorder(null);
+							carta2.setBorder(null);
+							carta3.setBorder(null);
+							carta4.setBorder(null);
+							carta5.setBorder(null);
+							pilhaReserva1Icon.setBorder(null);
+							pilhaDescarte3.setBorder(BorderFactory
+									.createBevelBorder(1));
+							pilhaDescarte1.setBorder(null);
+							pilhaDescarte2.setBorder(null);
+							pilhaDescarte4.setBorder(null);
+						} else {
+							cartaSelecionada = null;
+						}
 					} else {
-						pilhaDescarte3.setIcon(new ImageIcon(getClass()
-								.getResource(
-										"/view/view.imagens/carta"
-												+ cartaSelecionada.getNumero()
-												+ ".png")));
-						 //atorRede.enviarJogada(cartaSelecionada, 0);
-						getMesa().insereNoDescarte(cartaSelecionada, 3, false);
-						getMesa().getJogadorLocal().removeCartaSelecionada(
-								cartaSelecionada);
-						atualizaCartasMao(getMesa().getJogadorLocal().getMao());
-						atorRede.enviarJogada(getMesa(), 0);
-						cartaSelecionada = null;
+						if (mesa.verificaSeCartaNaoVeioDaReserva(cartaSelecionada)) {
+							pilhaDescarte3.setIcon(new ImageIcon(getClass()
+									.getResource(
+											"/view/view.imagens/carta"
+													+ cartaSelecionada
+															.getNumero()
+													+ ".png")));
+							// atorRede.enviarJogada(cartaSelecionada, 0);
+							getMesa().insereNoDescarte(cartaSelecionada, 3,
+									false);
+							getMesa().getJogadorDaVez().removeCartaSelecionada(
+									cartaSelecionada);
+							atualizaCartasMao(getMesa().getJogadorDaVez()
+									.getMao());
+							atorRede.enviarJogada(getMesa(), 0);
+							cartaSelecionada = null;
+							informaVez.setText("Não é sua vez");
+							informaVez.setForeground(Color.RED);
+						}
 					}
 				} else {
 					informaVezDoAdversario();
 				}
+			}
+
+			private void cartaVeioDoDescarte3() {
+				cartaSelecionada.setEhMao1(false);
+				cartaSelecionada.setEhMao2(false);
+				cartaSelecionada.setEhMao3(false);
+				cartaSelecionada.setEhMao4(false);
+				cartaSelecionada.setEhMao5(false);
+				cartaSelecionada.setEhDaReserva(false);
+				cartaSelecionada.setEhDoDescarte1(false);
+				cartaSelecionada.setEhDoDescarte2(false);
+				cartaSelecionada.setEhDoDescarte3(true);
+				cartaSelecionada.setEhDoDescarte4(false);
 			}
 		});
 
@@ -564,43 +642,75 @@ public class AtorJogador extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (atorRede.ehMinhaVez()) {
 					if (cartaSelecionada == null) {
-						cartaSelecionada = getMesa()
-								.getJogadorLocal()
-								.getPilhaDescarte4()
-								.get(getMesa().getJogadorLocal().getPilhaDescarte1()
-										.size() - 1);
-						carta1.setBorder(null);
-						carta2.setBorder(null);
-						carta3.setBorder(null);
-						carta4.setBorder(null);
-						carta5.setBorder(null);
-						pilhaReserva1Icon.setBorder(null);
-						pilhaDescarte4.setBorder(BorderFactory
-								.createBevelBorder(1));
-						pilhaDescarte1.setBorder(null);
-						pilhaDescarte2.setBorder(null);
-						pilhaDescarte3.setBorder(null);
+						if (getMesa().getJogadorDaVez().getEstoque()
+								.getPilhaDescarte4().size() != 0) {
+
+							cartaSelecionada = getMesa()
+									.getJogadorDaVez()
+									.getEstoque()
+									.getPilhaDescarte4()
+									.get(getMesa().getJogadorDaVez()
+											.getEstoque().getPilhaDescarte4()
+											.size() - 1);
+							cartaVeioDoDescarte4();
+							clickBordaElevadaDescarte4();
+						} else {
+							cartaSelecionada = null;
+						}
 					} else {
-						pilhaDescarte4.setIcon(new ImageIcon(getClass()
-								.getResource(
-										"/view/view.imagens/carta"
-												+ cartaSelecionada.getNumero()
-												+ ".png")));
-						//atorRede.enviarJogada(cartaSelecionada, 0);
-						getMesa().insereNoDescarte(cartaSelecionada, 4, false);
-						getMesa().getJogadorLocal().removeCartaSelecionada(
-								cartaSelecionada);
-						atualizaCartasMao(getMesa().getJogadorLocal().getMao());
-						atorRede.enviarJogada(getMesa(), 0);
-						cartaSelecionada = null;
+						if (mesa.verificaSeCartaNaoVeioDaReserva(cartaSelecionada)) {
+							pilhaDescarte4.setIcon(new ImageIcon(getClass()
+									.getResource(
+											"/view/view.imagens/carta"
+													+ cartaSelecionada
+															.getNumero()
+													+ ".png")));
+							getMesa().insereNoDescarte(cartaSelecionada, 4,
+									false);
+							getMesa().getJogadorDaVez().removeCartaSelecionada(
+									cartaSelecionada);
+							atualizaCartasMao(getMesa().getJogadorDaVez()
+									.getMao());
+							atorRede.enviarJogada(getMesa(), 0);
+							cartaSelecionada = null;
+							informaVez.setText("Não é sua vez");
+							informaVez.setForeground(Color.RED);
+						}
 					}
 				} else {
 					informaVezDoAdversario();
 				}
 			}
+
+			private void clickBordaElevadaDescarte4() {
+				carta1.setBorder(null);
+				carta2.setBorder(null);
+				carta3.setBorder(null);
+				carta4.setBorder(null);
+				carta5.setBorder(null);
+				pilhaReserva1Icon.setBorder(null);
+				pilhaDescarte4.setBorder(BorderFactory
+						.createBevelBorder(1));
+				pilhaDescarte1.setBorder(null);
+				pilhaDescarte2.setBorder(null);
+				pilhaDescarte3.setBorder(null);
+			}
+
+			private void cartaVeioDoDescarte4() {
+				cartaSelecionada.setEhMao1(false);
+				cartaSelecionada.setEhMao2(false);
+				cartaSelecionada.setEhMao3(false);
+				cartaSelecionada.setEhMao4(false);
+				cartaSelecionada.setEhMao5(false);
+				cartaSelecionada.setEhDaReserva(false);
+				cartaSelecionada.setEhDoDescarte1(false);
+				cartaSelecionada.setEhDoDescarte2(false);
+				cartaSelecionada.setEhDoDescarte3(false);
+				cartaSelecionada.setEhDoDescarte4(true);
+			}
 		});
 
-		JMenu menuSobre = new JMenu("Sobre");
+		JMenu menuSobre = new JMenu("Info. equipe");
 		menuSobre.addMouseListener(new java.awt.event.MouseAdapter() {
 
 			@Override
@@ -657,44 +767,85 @@ public class AtorJogador extends JFrame {
 	protected void atualizaPilhaDescarte(int verificaOrigemCarta2) {
 		switch (verificaOrigemCarta2) {
 		case 1:
-			pilhaDescarte1.setIcon(null);
-			pilhaDescarte1.setIcon(new ImageIcon(getClass().getResource(
-					"/view/view.imagens/carta"
-							+ getMesa().getJogadorLocal()
-									.getPilhaDescarte1()
-									.get(getMesa().getJogadorLocal()
-											.getPilhaDescarte1().size() - 1)
-									.getNumero() + ".png")));
+			if (getMesa().getJogadorDaVez().getEstoque().getPilhaDescarte1()
+					.size() != 0) {
+				pilhaDescarte1.setIcon(new ImageIcon(getClass()
+						.getResource(
+								"/view/view.imagens/carta"
+										+ getMesa()
+												.getJogadorDaVez()
+												.getEstoque()
+												.getPilhaDescarte1()
+												.get(getMesa()
+														.getJogadorDaVez()
+														.getEstoque()
+														.getPilhaDescarte1()
+														.size() - 1)
+												.getNumero() + ".png")));
+			} else {
+				pilhaDescarte1.setIcon(null);
+			}
 			break;
 		case 2:
-			pilhaDescarte2.setIcon(null);
-			pilhaDescarte2.setIcon(new ImageIcon(getClass().getResource(
-					"/view/view.imagens/carta"
-							+ getMesa().getJogadorLocal()
-									.getPilhaDescarte2()
-									.get(getMesa().getJogadorLocal()
-											.getPilhaDescarte2().size() - 1)
-									.getNumero() + ".png")));
+			if (getMesa().getJogadorDaVez().getEstoque().getPilhaDescarte2()
+					.size() != 0) {
+				pilhaDescarte2.setIcon(new ImageIcon(getClass()
+						.getResource(
+								"/view/view.imagens/carta"
+										+ getMesa()
+												.getJogadorDaVez()
+												.getEstoque()
+												.getPilhaDescarte2()
+												.get(getMesa()
+														.getJogadorDaVez()
+														.getEstoque()
+														.getPilhaDescarte2()
+														.size() - 1)
+												.getNumero() + ".png")));
+			} else {
+				pilhaDescarte2.setIcon(null);
+			}
 			break;
 		case 3:
-			pilhaDescarte3.setIcon(null);
-			pilhaDescarte3.setIcon(new ImageIcon(getClass().getResource(
-					"/view/view.imagens/carta"
-							+ getMesa().getJogadorLocal()
-									.getPilhaDescarte3()
-									.get(getMesa().getJogadorLocal()
-											.getPilhaDescarte3().size() - 1)
-									.getNumero() + ".png")));
+			if (getMesa().getJogadorDaVez().getEstoque().getPilhaDescarte3()
+					.size() != 0) {
+				pilhaDescarte3.setIcon(new ImageIcon(getClass()
+						.getResource(
+								"/view/view.imagens/carta"
+										+ getMesa()
+												.getJogadorDaVez()
+												.getEstoque()
+												.getPilhaDescarte3()
+												.get(getMesa()
+														.getJogadorDaVez()
+														.getEstoque()
+														.getPilhaDescarte3()
+														.size() - 1)
+												.getNumero() + ".png")));
+			} else {
+				pilhaDescarte3.setIcon(null);
+			}
 			break;
 		case 4:
-			pilhaDescarte4.setIcon(null);
-			pilhaDescarte4.setIcon(new ImageIcon(getClass().getResource(
-					"/view/view.imagens/carta"
-							+ getMesa().getJogadorLocal()
-									.getPilhaDescarte4()
-									.get(getMesa().getJogadorLocal()
-											.getPilhaDescarte4().size() - 1)
-									.getNumero() + ".png")));
+			if (getMesa().getJogadorDaVez().getEstoque().getPilhaDescarte4()
+					.size() != 0) {
+				pilhaDescarte4.setIcon(null);
+				pilhaDescarte4.setIcon(new ImageIcon(getClass()
+						.getResource(
+								"/view/view.imagens/carta"
+										+ getMesa()
+												.getJogadorDaVez()
+												.getEstoque()
+												.getPilhaDescarte4()
+												.get(getMesa()
+														.getJogadorDaVez()
+														.getEstoque()
+														.getPilhaDescarte4()
+														.size() - 1)
+												.getNumero() + ".png")));
+			} else {
+				pilhaDescarte4.setIcon(null);
+			}
 			break;
 
 		default:
@@ -704,16 +855,22 @@ public class AtorJogador extends JFrame {
 	}
 
 	protected void atualizaCartasReserva(List<Carta> pilhaReserva) {
-		// se for da reserva, remove icone atual, e seta icone da primeira carta
-		// antecessora a removida
-		pilhaReserva1Icon.setIcon(null);
-		pilhaReserva1Icon.setIcon(new ImageIcon(getClass().getResource(
-				"/view/view.imagens/carta"
-						+ getMesa().getJogadorLocal()
-								.getPilhaReserva()
-								.get(getMesa().getJogadorLocal().getPilhaReserva()
-										.size() - 1).getNumero() + ".png")));
-
+		if (getMesa().getJogadorDaVez().getPilhaReserva().size() != 0) {
+			pilhaReserva1Icon.setIcon(new ImageIcon(getClass().getResource(
+					"/view/view.imagens/carta"
+							+ getMesa()
+									.getJogadorDaVez()
+									.getPilhaReserva()
+									.get(getMesa().getJogadorDaVez()
+											.getPilhaReserva().size() - 1)
+									.getNumero() + ".png")));
+		} else {
+			pilhaReserva1Icon.setIcon(null);
+			mesa.getJogadorDaVez().setVencedor(true);
+			atorRede.enviarJogada(getMesa(), 0);
+		}
+		quantidadeReserva.setText("Cartas: "
+				+ getMesa().getJogadorDaVez().getPilhaReserva().size());
 	}
 
 	protected void atualizaCartasMao(List<Carta> mao) {
@@ -816,35 +973,18 @@ public class AtorJogador extends JFrame {
 				}
 				break;
 			default:
+				carta1.setIcon(null);
+				carta2.setIcon(null);
+				carta3.setIcon(null);
+				carta4.setIcon(null);
+				carta5.setIcon(null);
 				break;
 			}
-
 		}
 	}
 
 	public AtorJogador() {
 		initialize();
-	}
-
-	/**
-	 * 
-	 * @param indice
-	 */
-	public void selecionarDescarte(int indice) {
-
-	}
-
-	public void efetuarJogadaRede(int linhaOrigem, int colunaOrigem,
-			int linhaDestino, int colunaDestino) {
-
-	}
-
-	/**
-	 * 
-	 * @param carta
-	 */
-	public void inserirCartaNaMesa(int carta) {
-
 	}
 
 	public void iniciarPartidaRede(boolean iniciarComoSolicitante) {
@@ -894,30 +1034,32 @@ public class AtorJogador extends JFrame {
 	private void exibirEstado() {
 		carta1.setIcon(new ImageIcon(getClass().getResource(
 				"/view/view.imagens/carta"
-						+ getMesa().getJogadorLocal().getMao().get(0).getNumero()
-						+ ".png")));
+						+ getMesa().getJogadorLocal().getMao().get(0)
+								.getNumero() + ".png")));
 		carta2.setIcon(new ImageIcon(getClass().getResource(
 				"/view/view.imagens/carta"
-						+ getMesa().getJogadorLocal().getMao().get(1).getNumero()
-						+ ".png")));
+						+ getMesa().getJogadorLocal().getMao().get(1)
+								.getNumero() + ".png")));
 		carta3.setIcon(new ImageIcon(getClass().getResource(
 				"/view/view.imagens/carta"
-						+ getMesa().getJogadorLocal().getMao().get(2).getNumero()
-						+ ".png")));
+						+ getMesa().getJogadorLocal().getMao().get(2)
+								.getNumero() + ".png")));
 		carta4.setIcon(new ImageIcon(getClass().getResource(
 				"/view/view.imagens/carta"
-						+ getMesa().getJogadorLocal().getMao().get(3).getNumero()
-						+ ".png")));
+						+ getMesa().getJogadorLocal().getMao().get(3)
+								.getNumero() + ".png")));
 		carta5.setIcon(new ImageIcon(getClass().getResource(
 				"/view/view.imagens/carta"
-						+ getMesa().getJogadorLocal().getMao().get(4).getNumero()
-						+ ".png")));
+						+ getMesa().getJogadorLocal().getMao().get(4)
+								.getNumero() + ".png")));
 		pilhaReserva1Icon.setIcon(new ImageIcon(getClass().getResource(
 				"/view/view.imagens/carta"
-						+ getMesa().getJogadorLocal()
+						+ getMesa()
+								.getJogadorLocal()
 								.getPilhaReserva()
-								.get(getMesa().getJogadorLocal().getPilhaReserva()
-										.size() - 1).getNumero() + ".png")));
+								.get(getMesa().getJogadorLocal()
+										.getPilhaReserva().size() - 1)
+								.getNumero() + ".png")));
 
 	}
 
@@ -930,92 +1072,59 @@ public class AtorJogador extends JFrame {
 		return getMesa().informarPartidaEmAndamento();
 	}
 
-	 public void efetuarJogadaRede(Mesa mesa) {
-//	public void efetuarJogadaRede(Carta cartaSelecionada2, int destino) {
-		//mesa.tratarInsercaoNaMesa(cartaSelecionada2, destino, true);
+	public void efetuarJogadaRede(Mesa mesa) {
 		this.setMesa(mesa);
 		this.atualizaMesa(mesa);
-//		switch (destino) {
-//		case 1:
-//			base1.setIcon(new ImageIcon(getClass().getResource(
-//					"/view/view.imagens/carta" + cartaSelecionada2.getNumero()
-//							+ ".png")));
-//			break;
-//		case 2:
-//			base2.setIcon(new ImageIcon(getClass().getResource(
-//					"/view/view.imagens/carta" + cartaSelecionada2.getNumero()
-//							+ ".png")));
-//			break;
-//		case 3:
-//			base3.setIcon(new ImageIcon(getClass().getResource(
-//					"/view/view.imagens/carta" + cartaSelecionada2.getNumero()
-//							+ ".png")));
-//			break;
-//		case 4:
-//			base4.setIcon(new ImageIcon(getClass().getResource(
-//					"/view/view.imagens/carta" + cartaSelecionada2.getNumero()
-//							+ ".png")));
-//			break;
-//		default:
-//			if (atorRede.ehMinhaVez()) {
-//				informaVez.setText("Sua vez");
-//				informaVez.setForeground(Color.GREEN);
-//			} else {
-//				informaVez.setText("Não é sua vez");
-//				informaVez.setForeground(Color.RED);
-//			}
-//			break;
-//		}
-		if (atorRede.ehMinhaVez()) {
-			informaVez.setText("Sua vez");
-			informaVez.setForeground(Color.GREEN);
-		} else {
-			informaVez.setText("Não é sua vez");
-			informaVez.setForeground(Color.RED);
-		}
+		informaVez.setText("Sua vez");
+		informaVez.setForeground(Color.GREEN);
 		List<Carta> mao = mesa.verificaNecessidadeDeCartas(mesa
 				.getJogadorDaVez().getMao());
-		if (!mao.isEmpty()) {
+		if (mao != null) {
 			atualizaCartasMao(mao);
 		}
 	}
 
 	private void atualizaMesa(Mesa mesa2) {
-		if (!mesa2.getCartasBase1().isEmpty()) {
+		if (!mesa2.getMonte().getCartasBase1().isEmpty()) {
 			base1.setIcon(new ImageIcon(getClass().getResource(
 					"/view/view.imagens/carta"
-							+ mesa2.getCartasBase1()
-									.get(mesa2.getCartasBase1().size() - 1)
-									.getNumero() + ".png")));
+							+ mesa2.getMonte()
+									.getCartasBase1()
+									.get(mesa2.getMonte().getCartasBase1()
+											.size() - 1).getNumero() + ".png")));
 		} else {
 			base1.setIcon(null);
 		}
-		if (!mesa2.getCartasBase2().isEmpty()) {
+		if (!mesa2.getMonte().getCartasBase2().isEmpty()) {
 			base2.setIcon(new ImageIcon(getClass().getResource(
 					"/view/view.imagens/carta"
-							+ mesa2.getCartasBase2()
-									.get(mesa2.getCartasBase2().size() - 1)
-									.getNumero() + ".png")));
+							+ mesa2.getMonte()
+									.getCartasBase2()
+									.get(mesa2.getMonte().getCartasBase2()
+											.size() - 1).getNumero() + ".png")));
 
 		} else {
 			base2.setIcon(null);
 		}
-		if (!mesa2.getCartasBase3().isEmpty()) {
+		if (!mesa2.getMonte().getCartasBase3().isEmpty()) {
 			base3.setIcon(new ImageIcon(getClass().getResource(
 					"/view/view.imagens/carta"
-							+ mesa2.getCartasBase3()
-									.get(mesa2.getCartasBase3().size() - 1)
-									.getNumero() + ".png")));
+							+ mesa2.getMonte()
+									.getCartasBase3()
+									.get(mesa2.getMonte().getCartasBase3()
+											.size() - 1).getNumero() + ".png")));
 
 		} else {
 			base3.setIcon(null);
 		}
-		if (!getMesa().getCartasBase4().isEmpty()) {
+		if (!getMesa().getMonte().getCartasBase4().isEmpty()) {
 			base4.setIcon(new ImageIcon(getClass().getResource(
 					"/view/view.imagens/carta"
-							+ getMesa().getCartasBase4()
-									.get(getMesa().getCartasBase4().size() - 1)
-									.getNumero() + ".png")));
+							+ getMesa()
+									.getMonte()
+									.getCartasBase4()
+									.get(getMesa().getMonte().getCartasBase4()
+											.size() - 1).getNumero() + ".png")));
 
 		} else {
 			base4.setIcon(null);
